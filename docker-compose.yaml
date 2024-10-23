@@ -1,0 +1,17 @@
+version: '3'
+services:
+  api:
+    build: product-service
+    ports:
+      - '5000:5000'
+    environment:
+      MONGO_URI: mongodb://mongo:27017/productdb
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./data/db:/data/db

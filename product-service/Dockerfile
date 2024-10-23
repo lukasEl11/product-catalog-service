@@ -11,6 +11,6 @@ RUN npm run build
 RUN rm -rf ./node_modules
 RUN npm ci --omit=dev
 
-EXPOSE 8080
+EXPOSE 5000
 
 CMD ["node", "./dist", "--env=production"]
