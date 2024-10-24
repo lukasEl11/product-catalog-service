@@ -11,4 +11,7 @@ export default {
   db: {
     MONGO_URI: process.env.MONGO_URI ?? '',
   },
+  redis: {
+    REDIS_URL: process.env.REDIS_URL ?? '',
+  },
 } as const;
