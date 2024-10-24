@@ -1,14 +1,16 @@
 import express, { Router} from 'express';
 import { productController } from '../controllers/productController';
+import { createProductValidationRules, updateProductValidationRules, validIdValidationRules } from '../validators/productValidator';
+import { handleValidationErrors } from '../middleware/validationMiddleware';
 
 const ProductsRouter = Router();
 ProductsRouter.use(express.json());
 
 // Product CRUD routes
-ProductsRouter.post('/', productController.createProduct);
-ProductsRouter.put('/:id', productController.editProduct);
-ProductsRouter.delete('/:id', productController.deleteProduct);
+ProductsRouter.post('/', createProductValidationRules, handleValidationErrors, productController.createProduct);
+ProductsRouter.put('/:id',updateProductValidationRules, handleValidationErrors,  productController.editProduct);
+ProductsRouter.delete('/:id',validIdValidationRules, handleValidationErrors, productController.deleteProduct);
 ProductsRouter.get('/', productController.listProducts);
-ProductsRouter.get('/:id', productController.getProductById);
+ProductsRouter.get('/:id', validIdValidationRules, handleValidationErrors, productController.getProductById);
 
 export default ProductsRouter;
