@@ -1,6 +1,6 @@
 version: '3'
 services:
-  api:
+  product-service:
     build: product-service
     ports:
       - '5000:5000'
@@ -10,6 +10,11 @@ services:
     depends_on:
       - mongo
       - redis
+
+  review-processing-service:
+    build: review-processing-service
+    ports:
+      - '5100:5100'
 
   mongo:
     image: mongo
