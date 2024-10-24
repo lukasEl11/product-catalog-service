@@ -4,6 +4,7 @@ import express from 'express';
 import logger from 'jet-logger';
 import env from './express/env-vars';
 import ProductsRouter from './routes/productRoutes';
+import ReviewsRouter from './routes/reviewRoutes';
 import connectDB from './config/db';
 
 const app = express();
@@ -15,7 +16,8 @@ app.use(express.json());
 connectDB();
 
 // Route handler
-app.use('/api', ProductsRouter);
+app.use('/api/products', ProductsRouter);
+app.use('/api/reviews', ReviewsRouter);
 
 // Start the server
 app.listen(env.Port, () => {
