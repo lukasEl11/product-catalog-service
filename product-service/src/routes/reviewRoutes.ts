@@ -3,6 +3,7 @@ import { reviewController } from '../controllers/reviewController';
 import {
   submitReviewValidationRules,
   updateReviewValidationRules,
+  validProductIdValidationRules,
 } from '../validators/reviewValidator';
 import { handleValidationErrors } from '../middleware/validationMiddleware';
 import { validIdValidationRules } from '../validators/sharedValidator';
@@ -31,7 +32,7 @@ ReviewsRouter.delete(
 );
 ReviewsRouter.get(
   '/:productId',
-  validIdValidationRules,
+  validProductIdValidationRules,
   handleValidationErrors,
   reviewController.getReviewsForProduct
 );

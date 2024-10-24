@@ -64,3 +64,7 @@ export const updateReviewValidationRules = [
     .isInt({ min: 1, max: 5 })
     .withMessage('Price must be between 1 and 5'),
 ];
+
+export const validProductIdValidationRules = [
+  param('productId').isMongoId().withMessage('ID must be in a valid format'),
+];
