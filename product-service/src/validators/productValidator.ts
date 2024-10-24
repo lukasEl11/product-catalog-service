@@ -1,5 +1,4 @@
 import { check, param } from 'express-validator';
-import path from 'path';
 import { productService } from '../services/productService';
 
 export const createProductValidationRules = [
@@ -19,7 +18,7 @@ export const createProductValidationRules = [
     .notEmpty()
     .withMessage('Price is required')
     .isInt({ min: 1 })
-    .withMessage('Price must be between at least 1'),
+    .withMessage('Price must be at least 1'),
 ];
 
 export const updateProductValidationRules = [
@@ -45,9 +44,5 @@ export const updateProductValidationRules = [
   check('price')
     .optional()
     .isInt({ min: 1 })
-    .withMessage('Price must be between at least 1'),
-];
-
-export const validIdValidationRules = [
-  param('id').isMongoId().withMessage('ID must be in a valid format'),
+    .withMessage('Price must be at least 1'),
 ];
