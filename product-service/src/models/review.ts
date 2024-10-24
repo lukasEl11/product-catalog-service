@@ -1,4 +1,5 @@
 import mongoose, { Document, Schema } from 'mongoose';
+import { invalideCache } from '../cache/cache';
 
 export interface IReview extends Document {
   productId: string;
@@ -16,6 +17,18 @@ const reviewSchema: Schema = new Schema({
   reviewText: { type: String, required: true },
   rating: { type: Number, required: true, min: 1, max: 5 },
   timestamp: { type: Date, default: Date.now },
+});
+
+reviewSchema.post('save', (review: IReview, next) => {
+  invalideCache(`review:${review.id}`);
+  invalideCache(`review_list_product:${review.productId}`);
+  next();
+});
+
+reviewSchema.post('findOneAndDelete', (review: IReview, next) => {
+  invalideCache(`review:${review.id}`);
+  invalideCache(`review_list_product:${review.productId}`);
+  next();
 });
 
 const Review = mongoose.model<IReview>('Review', reviewSchema);

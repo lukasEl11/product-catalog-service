@@ -33,7 +33,9 @@ class ProductService {
   }
 
   async getProductById(id: string): Promise<IProduct | null> {
-    return await cacheWrapper(`product:${id}`, () => Product.findById(id));
+    return await cacheWrapper<IProduct | null>(`product:${id}`, () =>
+      Product.findById(id)
+    );
   }
 }
 

@@ -20,8 +20,11 @@ const cacheWrapper = async <T>(
   // Get fresh data
   const freshData = await queryFn();
 
-  // Set fresh data
-  await redisClient.setEx(keyPrefix, ttl, JSON.stringify(freshData));
+  if (freshData) {
+    // Set fresh data
+    await redisClient.setEx(keyPrefix, ttl, JSON.stringify(freshData));
+  }
+
   return freshData;
 };
 

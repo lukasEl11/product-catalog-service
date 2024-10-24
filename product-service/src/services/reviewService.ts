@@ -1,3 +1,4 @@
+import { cacheWrapper } from '../cache/cache';
 import Review, { IReview } from '../models/review';
 
 class ReviewService {
@@ -7,7 +8,9 @@ class ReviewService {
   }
 
   async getReviewById(id: string): Promise<IReview | null> {
-    return await Review.findById(id);
+    return await cacheWrapper<IReview | null>(`review:${id}`, () =>
+      Review.findById(id)
+    );
   }
 
   async updateReview(
@@ -32,7 +35,10 @@ class ReviewService {
   }
 
   async getReviewsForProduct(productId: string): Promise<IReview[]> {
-    return await Review.find({ productId });
+    return await cacheWrapper<IReview[]>(
+      `review_list_product:${productId}`,
+      () => Review.find({ productId })
+    );
   }
 }
 
