@@ -6,11 +6,15 @@ class ReviewService {
     return await review.save();
   }
 
+  async getReviewById(id: string): Promise<IReview | null> {
+    return await Review.findById(id);
+  }
+
   async updateReview(
     id: string,
     data: Partial<IReview>
   ): Promise<IReview | null> {
-    const review = await Review.findById(id);
+    const review = await this.getReviewById(id);
     if (!review) return null;
 
     review.firstName = data.firstName || review.firstName;
