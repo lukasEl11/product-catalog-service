@@ -1,4 +1,5 @@
 import mongoose, { Document, Schema } from 'mongoose';
+import { invalideCache } from '../cache/cache';
 
 export interface IProduct extends Document {
   name: string;
@@ -14,6 +15,18 @@ const productSchema: Schema = new Schema(
   },
   { timestamps: true }
 );
+
+productSchema.post('save', (product: IProduct, next) => {
+  invalideCache(`product:${product.id}`);
+  invalideCache(`product_list`);
+  next();
+});
+
+productSchema.post('findOneAndDelete', (product: IProduct, next) => {
+  invalideCache(`product:${product.id}`);
+  invalideCache(`product_list`);
+  next();
+});
 
 const Product = mongoose.model<IProduct>('Product', productSchema);
 

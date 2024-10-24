@@ -1,3 +1,4 @@
+import { cacheWrapper } from '../cache/cache';
 import Product, { IProduct } from '../models/product';
 
 class ProductService {
@@ -26,11 +27,13 @@ class ProductService {
   }
 
   async getAllProducts(): Promise<IProduct[]> {
-    return await Product.find({});
+    return await cacheWrapper<IProduct[]>(`product_list`, () =>
+      Product.find({})
+    );
   }
 
   async getProductById(id: string): Promise<IProduct | null> {
-    return await Product.findById(id);
+    return await cacheWrapper(`product:${id}`, () => Product.findById(id));
   }
 }
 

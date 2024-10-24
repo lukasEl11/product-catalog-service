@@ -9,7 +9,7 @@ class ReviewDto implements Partial<IReview> {
   rating: number;
 
   constructor(review: IReview) {
-    this.id = review.id;
+    this.id = review._id as string;
     this.productId = review.productId;
     this.firstName = review.firstName;
     this.lastName = review.lastName;

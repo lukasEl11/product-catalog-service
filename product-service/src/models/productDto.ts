@@ -7,7 +7,7 @@ class ProductDto implements Partial<IProduct> {
   price: number;
 
   constructor(product: IProduct) {
-    this.id = product.id;
+    this.id = product._id as string;
     this.name = product.name;
     this.description = product.description;
     this.price = product.price;
