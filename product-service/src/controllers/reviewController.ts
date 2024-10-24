@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import logger from 'jet-logger';
 import { reviewService } from '../services/reviewService';
 import { productService } from '../services/productService';
+import ReviewDto from '../models/reviewDto';
 
 class ReviewController {
   public submitReview = async (req: Request, res: Response): Promise<void> => {
@@ -16,7 +17,7 @@ class ReviewController {
         reviewText,
         rating,
       });
-      res.status(201).json(review);
+      res.status(201).json(new ReviewDto(review));
     } catch (error) {
       logger.err(error);
       res.status(500).json({ message: 'Server error' });
@@ -38,7 +39,7 @@ class ReviewController {
         res.status(404).json({ message: 'Review not found' });
         return;
       }
-      res.status(200).json(updatedReview);
+      res.status(200).json(new ReviewDto(updatedReview));
     } catch (error) {
       logger.err(error);
       res.status(500).json({ message: 'Server error' });
@@ -67,8 +68,8 @@ class ReviewController {
     const { productId } = req.params;
 
     try {
-      const products = await reviewService.getReviewsForProduct(productId);
-      res.status(200).json(products);
+      const reviews = await reviewService.getReviewsForProduct(productId);
+      res.status(200).json(reviews.map((review) => new ReviewDto(review)));
     } catch (error) {
       res.status(500).json({ message: 'Server error' });
     }
