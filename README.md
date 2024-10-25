@@ -120,9 +120,9 @@ Start the server
 
 ## Assets
 
-- [Postman collection](https://github.com/lukasEl11/product-catalog-service/assets/postman_collection.json)
-- [Product service local env files](https://github.com/lukasEl11/product-catalog-service/product-service/env)
-- [Review processing local env files](https://github.com/lukasEl11/product-catalog-service/review-processing-service/env)
+- [Postman collection](https://github.com/lukasEl11/product-catalog-service/blob/main/assets/postman_collection.json)
+- [Product service local env files](https://github.com/lukasEl11/product-catalog-service/tree/main/product-service/env)
+- [Review processing local env files](https://github.com/lukasEl11/product-catalog-service/tree/main/review-processing-service/env)
 
 ## TODO
 
