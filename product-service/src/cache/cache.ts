@@ -1,6 +1,15 @@
 import redisClient from '../config/redis';
 import logger from 'jet-logger';
 
+/**
+ * Cache data in redis(if is available)
+ *
+ * @template T
+ * @param {string} keyPrefix
+ * @param {() => Promise<T>} queryFn
+ * @param {number} [ttl=3600]
+ * @return {*}  {Promise<T>}
+ */
 const cacheWrapper = async <T>(
   keyPrefix: string,
   queryFn: () => Promise<T>,
@@ -28,6 +37,11 @@ const cacheWrapper = async <T>(
   return freshData;
 };
 
+/**
+ * Invalide cache
+ *
+ * @param {string} keyPrefix
+ */
 const invalideCache = async (keyPrefix: string) => {
   await redisClient.del(keyPrefix);
   logger.info(`[Invalide] for ${keyPrefix}`);

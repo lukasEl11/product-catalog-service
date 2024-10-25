@@ -2,7 +2,18 @@ import amqp from 'amqplib';
 import env from '../express/env-vars';
 import logger from 'jet-logger';
 
-export async function connectRabbitMQ(retries = 10, interval = 1000) {
+/**
+ * Connect to rabbitMQ
+ *
+ * @export
+ * @param {number} [retries=10]
+ * @param {number} [interval=1000]
+ * @return {*}  {(Promise<amqp.Channel | undefined>)}
+ */
+export async function connectRabbitMQ(
+  retries: number = 10,
+  interval: number = 1000
+): Promise<amqp.Channel | undefined> {
   let attempts = 0;
 
   while (attempts < retries) {

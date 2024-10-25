@@ -5,6 +5,13 @@ import { productService } from '../services/productService';
 import ProductDto from '../models/productDto';
 
 class ProductController {
+  /**
+   * Create product Endpoit
+   *
+   * @param {Request} req
+   * @param {Response} res
+   * @memberof ProductController
+   */
   public createProduct = async (req: Request, res: Response): Promise<void> => {
     const { name, description, price } = req.body;
 
@@ -21,6 +28,13 @@ class ProductController {
     }
   };
 
+  /**
+   * Edit product endpoint
+   *
+   * @param {Request} req
+   * @param {Response} res
+   * @memberof ProductController
+   */
   public editProduct = async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params;
     const { name, description, price } = req.body;
@@ -42,6 +56,13 @@ class ProductController {
     }
   };
 
+  /**
+   * Delete product endpoint
+   *
+   * @param {Request} req
+   * @param {Response} res
+   * @memberof ProductController
+   */
   public deleteProduct = async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params;
 
@@ -58,6 +79,13 @@ class ProductController {
     }
   };
 
+  /**
+   * Get all products endpoint
+   *
+   * @param {Request} req
+   * @param {Response} res
+   * @memberof ProductController
+   */
   public listProducts = async (req: Request, res: Response): Promise<void> => {
     try {
       const products = await productService.getAllProducts();
@@ -67,6 +95,13 @@ class ProductController {
     }
   };
 
+  /**
+   * Get product by ID endpoint
+   *
+   * @param {Request} req
+   * @param {Response} res
+   * @memberof ProductController
+   */
   public getProductById = async (
     req: Request,
     res: Response

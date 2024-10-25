@@ -4,6 +4,13 @@ import { reviewService } from '../services/reviewService';
 import ReviewDto from '../models/reviewDto';
 
 class ReviewController {
+  /**
+   * Submit/Create review for provided product (productId) endpoint
+   *
+   * @param {Request} req
+   * @param {Response} res
+   * @memberof ReviewController
+   */
   public submitReview = async (req: Request, res: Response): Promise<void> => {
     const { productId, firstName, lastName, reviewText, rating } = req.body;
 
@@ -22,6 +29,13 @@ class ReviewController {
     }
   };
 
+  /**
+   * Edit review endpoint
+   *
+   * @param {Request} req
+   * @param {Response} res
+   * @memberof ReviewController
+   */
   public editReview = async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params;
     const { firstName, lastName, reviewText, rating } = req.body;
@@ -44,6 +58,13 @@ class ReviewController {
     }
   };
 
+  /**
+   * Delete review endpoint
+   *
+   * @param {Request} req
+   * @param {Response} res
+   * @memberof ReviewController
+   */
   public deleteReview = async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params;
     try {
@@ -59,6 +80,13 @@ class ReviewController {
     }
   };
 
+  /**
+   *  Get list of reviews for provided product (productId) endpoint
+   *
+   * @param {Request} req
+   * @param {Response} res
+   * @memberof ReviewController
+   */
   public getReviewsForProduct = async (
     req: Request,
     res: Response
