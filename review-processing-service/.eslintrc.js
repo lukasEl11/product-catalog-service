@@ -1,26 +1,34 @@
+// .eslintrc.js
 module.exports = {
+  root: true,
+  parser: '@typescript-eslint/parser', // Specifies the ESLint parser
+  parserOptions: {
+    ecmaVersion: 2020, // Allows for parsing modern ECMAScript features
+    sourceType: 'module', // Allows for the use of imports
+  },
   env: {
     browser: true,
-    es2021: true,
+    es6: true,
     node: true,
   },
   extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:node/recommended',
-    'plugin:prettier/recommended',
+    'eslint:recommended', // ESLint recommended rules
+    'plugin:@typescript-eslint/recommended', // TypeScript recommended rules
+    'plugin:prettier/recommended', // Enables eslint-plugin-prettier
   ],
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaVersion: 12,
-    sourceType: 'module',
-  },
-  plugins: ['@typescript-eslint', 'prettier'],
+  plugins: ['@typescript-eslint'], // TypeScript plugin
   rules: {
-    'prettier/prettier': 'error',
-    'no-console': 'warn',
-    '@typescript-eslint/no-unused-vars': 'warn',
-    'node/no-unsupported-features/es-syntax': 'off',
-    'node/no-unpublished-import': 'off',
+    // Add custom rules here
+    '@typescript-eslint/no-unused-vars': 'warn', // Warns on unused variables
+    '@typescript-eslint/no-explicit-any': 'off', // Allows the use of 'any'
+    '@typescript-eslint/explicit-module-boundary-types': 'off', // No need to explicitly type module boundaries
   },
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'], // Apply these rules only to TypeScript files
+      rules: {
+        // TypeScript specific rules can be added here
+      },
+    },
+  ],
 };
