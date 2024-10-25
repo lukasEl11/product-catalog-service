@@ -37,6 +37,14 @@ class ProductService {
       Product.findById(id)
     );
   }
+
+  async updateProductAvgRating(productId: string, avgRating: string) {
+    const product = await Product.findById(productId);
+    if (!product) return null;
+
+    product.avgRating = Number(avgRating) || product.avgRating;
+    return await product.save();
+  }
 }
 
 export const productService = new ProductService();

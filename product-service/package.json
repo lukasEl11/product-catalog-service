@@ -25,6 +25,7 @@
     "exec": "./node_modules/.bin/ts-node --files -r tsconfig-paths/register ./src"
   },
   "devDependencies": {
+    "@types/amqplib": "^0.10.5",
     "@types/express": "^5.0.0",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^22.7.9",
@@ -42,10 +43,11 @@
     "typescript": "^5.6.3"
   },
   "dependencies": {
+    "amqplib": "^0.10.4",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
-    "jet-logger": "^2.0.1",
     "express-validator": "^7.2.0",
+    "jet-logger": "^2.0.1",
     "mongoose": "^8.7.2",
     "redis": "^4.7.0",
     "ts-command-line-args": "^2.5.1"

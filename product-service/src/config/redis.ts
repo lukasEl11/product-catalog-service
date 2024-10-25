@@ -9,7 +9,7 @@ redisClient.on('error', (err) => {
 });
 
 redisClient.on('connect', () => {
-  logger.info('Connected to Redis...');
+  logger.info('Redis connected');
 });
 
 redisClient.connect(); // For Redis v4 and above, make sure to use async `connect`.

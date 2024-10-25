@@ -11,6 +11,9 @@ export default {
   db: {
     MONGO_URI: process.env.MONGO_URI ?? '',
   },
+  rabbitmq: {
+    RABBITMQ_URI: process.env.RABBITMQ_URL ?? '',
+  },
   redis: {
     REDIS_URL: process.env.REDIS_URL ?? '',
   },

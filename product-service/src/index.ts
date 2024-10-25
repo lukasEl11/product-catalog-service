@@ -6,6 +6,7 @@ import env from './express/env-vars';
 import ProductsRouter from './routes/productRoutes';
 import ReviewsRouter from './routes/reviewRoutes';
 import connectDB from './config/db';
+import { messageService } from './services/messageService';
 
 const app = express();
 
@@ -14,6 +15,9 @@ app.use(express.json());
 
 // Connect to MongoDB
 connectDB();
+
+// Connect to RabbitMQ and wait for average products rating
+messageService.consumeAverageRatingMessages();
 
 // Route handler
 app.use('/api/products', ProductsRouter);
