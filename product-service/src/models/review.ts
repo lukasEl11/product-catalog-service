@@ -1,6 +1,5 @@
 import mongoose, { Document, Schema } from 'mongoose';
 import { invalideCache } from '../cache/cache';
-import { reviewService } from '../services/reviewService';
 import { messageService } from '../services/messageService';
 
 export interface IReview extends Document {

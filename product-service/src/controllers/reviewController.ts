@@ -1,8 +1,6 @@
 import { Request, Response } from 'express';
-import mongoose from 'mongoose';
 import logger from 'jet-logger';
 import { reviewService } from '../services/reviewService';
-import { productService } from '../services/productService';
 import ReviewDto from '../models/reviewDto';
 
 class ReviewController {

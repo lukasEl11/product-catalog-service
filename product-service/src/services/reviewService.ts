@@ -1,6 +1,5 @@
 import { cacheWrapper } from '../cache/cache';
 import Review, { IReview } from '../models/review';
-import { connectRabbitMQ } from '../config/rabbitmq';
 
 class ReviewService {
   async createReview(data: Partial<IReview>): Promise<IReview> {
