@@ -15,6 +15,10 @@ class MessageService {
     try {
       const channel = await connectRabbitMQ();
       const queue = 'averageRatingQueue';
+      if (!channel) {
+        logger.err('RabbitMQ connection does not exists.');
+        return;
+      }
 
       await channel.assertQueue(queue, { durable: true });
       logger.info(`Waiting for messages in ${queue}`);
@@ -45,6 +49,11 @@ class MessageService {
   async sendReviewToProcessing(review: IReview): Promise<void> {
     const channel = await connectRabbitMQ();
     const queue = 'reviewQueue';
+
+    if (!channel) {
+      logger.err('RabbitMQ connection does not exists.');
+      return;
+    }
 
     await channel.assertQueue(queue, { durable: true });
     const message = JSON.stringify(review);

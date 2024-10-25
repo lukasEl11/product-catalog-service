@@ -17,6 +17,11 @@ class MessageService {
       const reviewQueue = 'reviewQueue';
       const ratingQueue = 'averageRatingQueue';
 
+      if (!channel) {
+        logger.err('RabbitMQ connection does not exists.');
+        return;
+      }
+
       await channel.assertQueue(reviewQueue, { durable: true });
       await channel.assertQueue(ratingQueue, { durable: true });
       logger.info(`Waiting for messages in ${reviewQueue}`);
