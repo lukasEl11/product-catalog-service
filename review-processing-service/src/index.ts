@@ -1,8 +1,10 @@
-import logger from 'jet-logger';
-import env from './setup/env-vars';
+import './setup/pre-start'; // Must be the first import
 
-const main = () => {
-  logger.info(`Running: ${env.AppVersion}`);
-};
+import connectDB from './config/db';
+import { messageService } from './services/messageService';
 
-main();
+// Connect to MongoDB
+connectDB();
+
+// Connect to RabbitMQ and wait for reviews
+messageService.consumeReviewMessages();

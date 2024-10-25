@@ -1,21 +1,5 @@
 version: '3'
 services:
-  product-service:
-    build: product-service
-    ports:
-      - '5000:5000'
-    environment:
-      - MONGO_URI=mongodb://mongo:27017/productdb
-      - REDIS_URL=redis://redis:6379
-    depends_on:
-      - mongo
-      - redis
-
-  review-processing-service:
-    build: review-processing-service
-    ports:
-      - '5100:5100'
-
   mongo:
     image: mongo
     ports:
@@ -27,3 +11,34 @@ services:
     image: redis
     ports:
       - '6379:6379'
+
+  rabbitmq:
+    image: 'rabbitmq:3-management'
+    container_name: rabbitmq
+    ports:
+      - '5672:5672' # Connections
+      - '15672:15672' # UI
+
+  product-service:
+    build: product-service
+    ports:
+      - '5000:5000'
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/productdb
+      - REDIS_URL=redis://redis:6379
+      - RABBITMQ_URL=amqp://rabbitmq
+    depends_on:
+      - mongo
+      - redis
+      - rabbitmq
+
+  review-processing-service:
+    build: review-processing-service
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/productdb
+      - RABBITMQ_URL=amqp://rabbitmq
+    depends_on:
+      - mongo
+      - rabbitmq
+    deploy:
+      replicas: 3

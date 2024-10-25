@@ -25,6 +25,7 @@
     "exec": "./node_modules/.bin/ts-node --files -r tsconfig-paths/register ./src"
   },
   "devDependencies": {
+    "@types/amqplib": "^0.10.5",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^22.7.9",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
@@ -40,8 +41,10 @@
     "typescript": "^5.6.3"
   },
   "dependencies": {
+    "amqplib": "^0.10.4",
     "dotenv": "^16.4.5",
     "jet-logger": "^2.0.1",
+    "mongoose": "^8.7.2",
     "ts-command-line-args": "^2.5.1"
   }
 }

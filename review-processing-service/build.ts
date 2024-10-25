@@ -24,9 +24,9 @@ import { version } from './package.json';
     // Remove current build
     await remove('./dist/');
     // Copy back-end files
-    await copy('./env/production.env', './dist/express/production.env');
+    await copy('./env/production.env', './dist/setup/production.env');
     await exec(
-      `echo "\n\nAPP_VERSION=${version}" >> ./dist/express/production.env`,
+      `echo "\n\nAPP_VERSION=${version}" >> ./dist/setup/production.env`,
       './'
     );
     await exec('tsc --build tsconfig.prod.json', './');
